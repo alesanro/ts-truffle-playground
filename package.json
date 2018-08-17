@@ -9,9 +9,13 @@
   "scripts": {
     "test": "npx tsc && npx truffle test"
   },
+  "dependencies": {
+    "@types/web3": "1.0.3"
+  },
   "devDependencies": {
     "@types/chai": "^4.1.4",
     "@types/mocha": "^5.2.5",
+    "bignumber.js": "^7.2.1",
     "chai": "^4.1.2",
     "ganache-cli": "^6.1.8",
     "mocha": "^5.2.0",
