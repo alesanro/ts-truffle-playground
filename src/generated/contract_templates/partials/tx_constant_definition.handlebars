@@ -1,0 +1,13 @@
+namespace {{this.tsName}} {
+
+	type {{this.name}}ArgsFunction<T> = (tx?: Tx) => Promise<T>
+
+	interface TransactionCallable<T> {
+		request(tx?: Tx): Promise<Request>;
+		call(tx?: Tx): Promise<T>;
+		sendTransaction(tx?: Tx): Promise<TransactionResult>;
+		estimateGas(tx?: Tx): Promise<number>;
+	}
+
+	interface FunctionResult<T> extends {{this.name}}ArgsFunction<T>, TransactionCallable<T> {}
+}

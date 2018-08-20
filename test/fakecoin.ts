@@ -1,4 +1,4 @@
-import Web3 = require('web3')
+import Web3 from 'web3';
 import { TruffleArtifacts } from '../src/generated/contracts/artifacts'
 import { ContractContextDefinition } from 'truffle';
 
@@ -29,12 +29,12 @@ contract("FakeCoin", ([ owner, ...others ]) => {
 		})
 
 		it("should mint tokens", async () => {
-			const tx = await coin.mint(owner, "10000")
+			const tx = await coin.mint(owner, web3.toBigNumber("10000"))
 			console.log(`### ${JSON.stringify(tx, null, 4)}`);
 		})
 
 		it("should get estimated gas (mint)", async () => {
-			console.log(`### ${await coin.mint.estimateGas(owner, "1000")}`)
+			console.log(`### ${await coin.mint.estimateGas(owner, web3.toBigNumber("1000"))}`)
 		})
 
 		it("should get estimated gas (totalSupply)", async () => {
@@ -42,15 +42,15 @@ contract("FakeCoin", ([ owner, ...others ]) => {
 		})
 
 		it("should get request (mint)", async () => {
-			console.log(`### ${JSON.stringify(await coin.mint.request(owner, "1000"), null, 4)}`)
+			console.log(`### ${JSON.stringify(await coin.mint.request(owner, web3.toBigNumber("1000")), null, 4)}`)
 		})
 
 		it.skip("should get data (mint)", async () => {
-			// console.log(`### ${await coin.mint.getData(owner, "1000")}`)
+			// console.log(`### ${await coin.mint.getData(owner, web3.toBigNumber("1000"))}`)
 		})
 
 		it("should get call (mint)", async () => {
-			console.log(`### ${await coin.mint.call(owner, "1000")}`)
+			console.log(`### ${await coin.mint.call(owner, web3.toBigNumber("1000"))}`)
 		})
 
 		it("should get call (totalSupply)", async () => {
@@ -58,12 +58,12 @@ contract("FakeCoin", ([ owner, ...others ]) => {
 		})
 
 		it("should mint tokens for other account", async () => {
-			const tx = await coin.mint(others[0], "10000", { from: others[0] })
+			const tx = await coin.mint(others[0], web3.toBigNumber("10000"), { from: others[0] })
 			console.log(`### ${JSON.stringify(tx, null, 4)}`);
 		})
 
 		it("should mint with sendTransaction tokens for other account", async () => {
-			const tx = await coin.mint.sendTransaction(others[0], "10000", { from: others[0] })
+			const tx = await coin.mint.sendTransaction(others[0], web3.toBigNumber("10000"), { from: others[0] })
 			console.log(`### ${JSON.stringify(tx, null, 4)}`);
 		})
 

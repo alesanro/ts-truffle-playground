@@ -5,6 +5,4 @@
 {{^singleReturnValue}}
 [{{#each outputs}}{{#returnType type components}}{{/returnType}}{{#unless @last}}, {{/unless}}{{/each}}]
 {{/singleReturnValue}}
-{{else}}
-void
-{{/if}}
+{{else}}void{{/if}}

@@ -7,8 +7,8 @@ declare module '*.json' {
 }
 
 declare module 'truffle' {
-  import { Tx } from 'web3/eth/types';
-  import { TransactionReceipt } from 'web3/types';
+  import { TxData as Tx, TransactionReceipt, ContractInstance } from 'web3';
+  // import { TransactionReceipt } from 'web3/types';
   
   
   namespace truffle {
@@ -28,9 +28,11 @@ declare module 'truffle' {
       sendTransaction(tx?: Tx): Promise<TransactionResult>;
     }
 
-    interface Contract<T> extends ContractBase {
-      at(address: Address): Promise<T>;
+    interface Contract<T extends BaseContractInstance> extends ContractBase {
       deployed(): Promise<T>;
+    }
+
+    interface BaseContractInstance extends ContractInstance {
     }
 
     interface AnyContract extends Contract<any> {
@@ -76,10 +78,6 @@ declare module 'truffle' {
         library: ContractBase,
         contracts: ContractBase | [ContractBase]
       ): Promise<void>;
-    }
-
-    interface BaseContractInstance {
-      address: Address
     }
   }
 
