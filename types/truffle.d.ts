@@ -1,7 +1,5 @@
-
-declare type Callback<T> = (err: Error | null, value: T) => void;
-
 declare type Address = string;
+declare type AmountValue = string | number
 
 declare module '*.json' {
   const value: any;
@@ -10,7 +8,9 @@ declare module '*.json' {
 
 declare module 'truffle' {
   import { Tx } from 'web3/eth/types';
-
+  import { TransactionReceipt } from 'web3/types';
+  
+  
   namespace truffle {
     
     type ContractCallback = (
@@ -25,7 +25,7 @@ declare module 'truffle' {
 
     interface ContractBase {
       address: Address;
-      sendTransaction(Tx: Tx): Promise<TransactionResult>;
+      sendTransaction(tx?: Tx): Promise<TransactionResult>;
     }
 
     interface Contract<T> extends ContractBase {
@@ -40,17 +40,6 @@ declare module 'truffle' {
     interface TruffleArtifacts {
       require(name: string): AnyContract;
     }
-
-    type TransactionReceipt = {
-      transactionHash: string;
-      transactionIndex: number;
-      blockHash: string;
-      blockNumber: number;
-      gasUsed: number;
-      cumulativeGasUsed: number;
-      contractAddress: Address | null;
-      logs: [TransactionLog];
-    };
 
     type TransactionLog = {
       logIndex: number;
@@ -70,6 +59,16 @@ declare module 'truffle' {
       logs: [TransactionLog];
     };
 
+    interface Request {
+      method: 'eth_call' | 'eth_sendTransaction';
+      params: RequestParameter[];
+    }
+
+    interface RequestParameter {
+      to: Address;
+      data: string;
+    }
+
     interface Deployer extends Promise<void> {
       deploy(object: ContractBase, ...args: any[]): Promise<void>;
 
@@ -77,6 +76,10 @@ declare module 'truffle' {
         library: ContractBase,
         contracts: ContractBase | [ContractBase]
       ): Promise<void>;
+    }
+
+    interface BaseContractInstance {
+      address: Address
     }
   }
 
