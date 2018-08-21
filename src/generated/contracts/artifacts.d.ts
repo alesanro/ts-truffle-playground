@@ -1,5 +1,6 @@
 
-import { Contract as TruffleContract, TruffleArtifacts } from 'truffle';
+import { TruffleContract } from 'truffle-contract';
+import { TruffleArtifacts } from 'truffle';
 import FakeCoinInstance from 'FakeCoinInstance'
 
 

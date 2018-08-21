@@ -9,7 +9,7 @@ declare module "FakeCoinInstance" {
 	
 	import BigNumber from "bignumber.js"
     import { TxData as Tx } from 'web3'
-    import { BaseContractInstance, TransactionResult, Request } from 'truffle';
+    import { DeployedContract, TransactionResult, Request } from 'truffle-contract';
 
     namespace FakeCoinInstanceInternal {
 
@@ -117,7 +117,7 @@ declare module "FakeCoinInstance" {
         }            }
 
 
-    interface FakeCoinInstance extends BaseContractInstance { 
+    interface FakeCoinInstance extends DeployedContract { 
         balanceOf: FakeCoinInstanceInternal.balanceOf.FunctionResult<BigNumber
 >;
         mint: FakeCoinInstanceInternal.mint.FunctionResult<void>;

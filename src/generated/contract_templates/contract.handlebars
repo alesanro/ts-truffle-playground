@@ -24,9 +24,9 @@ export enum {{contractName}}Events {
 
 declare module "{{contractName}}Instance" {
 
-    import BigNumber from "bignumber.js"
+    import BigNumber from "bignumber.js";
     import { TxData as Tx, TransactionObject } from "web3";
-    import { BaseContractInstance, TransactionResult, Request } from 'truffle';
+    import { DeployedContract, TransactionResult, Request } from 'truffle-contract';
 
     namespace {{contractName}}InstanceInternal {
 
