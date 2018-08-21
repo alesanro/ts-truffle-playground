@@ -1,7 +1,8 @@
+
 namespace {{this.tsName}} {
 
 	interface TransactionCallable<T> {
-		({{> typed_params inputs=inputs}} tx?: Tx): Promise<TransactionResult>;
+		({{> typed_params inputs=inputs}} tx?: Tx): Promise<{{#if constant}}T{{else}}TransactionResult{{/if}}>;
 		call({{> typed_params inputs=inputs}} tx?: Tx): Promise<T>;
 		sendTransaction({{> typed_params inputs=inputs}} tx?: Tx): Promise<TransactionResult>;
 		estimateGas({{> typed_params inputs=inputs}} tx?: Tx): Promise<number>;

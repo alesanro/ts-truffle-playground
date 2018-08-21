@@ -31,18 +31,12 @@ declare module "{{contractName}}Instance" {
     namespace {{contractName}}InstanceInternal {
 
         {{#each methods}}
-        {{#this.constant}}  {{!-- if method is constant --}}
-        {{> tx_constant_definition contractName=../contractName }}
-        {{/this.constant}} 
-        {{^this.constant}}  {{!-- if method is non-constant --}}
-        {{> tx_func_definition contractName=../contractName }}
-        {{/this.constant}}
+        {{> tx_definition contractName=../contractName }}
         {{/each}}
-
     }
 
-    {{!-- namespace {{contractName}}Instance {
-    } --}}
+    namespace {{contractName}}Instance {
+    }
 
     interface {{contractName}}Instance extends DeployedContract { 
         {{#each methods}}
