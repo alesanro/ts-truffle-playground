@@ -25,27 +25,28 @@ export enum {{contractName}}Events {
 declare module "{{contractName}}Instance" {
 
     import BigNumber from "bignumber.js";
-    import { TxData as Tx, TransactionObject } from "web3";
+    import { TxData as Tx } from "web3";
     import { DeployedContract, TransactionResult, Request } from 'truffle-contract';
 
     namespace {{contractName}}InstanceInternal {
 
         {{#each methods}}
         {{#this.constant}}  {{!-- if method is constant --}}
-        {{> tx_constant_definition contractName=../contractName}}
+        {{> tx_constant_definition contractName=../contractName }}
         {{/this.constant}} 
         {{^this.constant}}  {{!-- if method is non-constant --}}
-        {{> tx_func_definition contractName=../contractName}}
+        {{> tx_func_definition contractName=../contractName }}
         {{/this.constant}}
         {{/each}}
+
     }
 
     {{!-- namespace {{contractName}}Instance {
     } --}}
 
-    interface {{contractName}}Instance extends BaseContractInstance { 
+    interface {{contractName}}Instance extends DeployedContract { 
         {{#each methods}}
-        {{this.name}}: {{@root.contractName}}InstanceInternal.{{this.tsName}}.FunctionResult<{{> return_type}}>;
+        {{this.name}}: {{@root.contractName}}InstanceInternal.{{this.tsName}}.TransactionCallable<{{> return_type }}>;
         {{/each}}
     }
 

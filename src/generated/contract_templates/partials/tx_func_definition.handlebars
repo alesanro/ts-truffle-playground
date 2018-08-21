@@ -1,12 +1,10 @@
 namespace {{this.tsName}} {
-	type {{this.name}}ArgsFunction<T> = ({{> typed_params inputs=inputs}} tx?: Tx) => Promise<TransactionResult>
 
 	interface TransactionCallable<T> {
-		request({{> typed_params inputs=inputs}} tx?: Tx): Promise<Request>;
+		({{> typed_params inputs=inputs}} tx?: Tx): Promise<TransactionResult>;
 		call({{> typed_params inputs=inputs}} tx?: Tx): Promise<T>;
 		sendTransaction({{> typed_params inputs=inputs}} tx?: Tx): Promise<TransactionResult>;
 		estimateGas({{> typed_params inputs=inputs}} tx?: Tx): Promise<number>;
+		request({{> typed_params inputs=inputs}} tx?: Tx): Promise<Request>;
 	}
-
-	interface FunctionResult<M> extends {{this.name}}ArgsFunction<M>, TransactionCallable<M> {}
 }
