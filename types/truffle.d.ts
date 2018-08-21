@@ -7,9 +7,7 @@ declare module '*.json' {
 }
 
 declare module 'truffle' {
-  import { TxData as Tx, TransactionReceipt, ContractInstance } from 'web3';
-  // import { TransactionReceipt } from 'web3/types';
-  
+  import { TxData as Tx, TransactionReceipt, ContractInstance } from 'web3';  
   
   namespace truffle {
     
