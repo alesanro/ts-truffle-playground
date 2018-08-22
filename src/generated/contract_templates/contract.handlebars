@@ -4,7 +4,7 @@
 // tslint:enable:no-unused-variable
 
 
-{{!-- {{#if events}}
+{{#if events}}
 export type {{contractName}}EventArgs =
 {{#each events}}
     | {{@root.contractName}}{{name}}EventArgs{{#if @last}};{{/if}}
@@ -20,7 +20,7 @@ export enum {{contractName}}Events {
 {{> event}}
 
 {{/each}}
-{{/if}} --}}
+{{/if}}
 
 declare module "{{contractName}}Instance" {
 
