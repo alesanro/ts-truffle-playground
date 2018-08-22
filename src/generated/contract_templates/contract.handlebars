@@ -1,8 +1,17 @@
 // tslint:disable:no-consecutive-blank-lines ordered-imports align trailing-comma whitespace class-name
 // tslint:disable:no-unused-variable
-
+import BigNumber from "bignumber.js";
+import { TxData as Tx, DecodedLogArgs } from "web3";
+import { DeployedContract, TransactionResult, Request } from 'truffle-contract';
 // tslint:enable:no-unused-variable
 
+
+declare namespace {{contractName}}InstanceInternal {
+
+    {{#each methods}}
+    {{> tx_definition contractName=../contractName }}
+    {{/each}}
+}
 
 {{#if events}}
 export type {{contractName}}EventArgs =
@@ -18,31 +27,13 @@ export enum {{contractName}}Events {
 
 {{#each events}}
 {{> event}}
-
 {{/each}}
 {{/if}}
 
-declare module "{{contractName}}Instance" {
+export interface {{contractName}}Instance extends DeployedContract { 
+    {{#each methods}}
+    {{this.name}}: {{@root.contractName}}InstanceInternal.{{this.tsName}}.TransactionCallable<{{> return_type }}>;
+    {{/each}}
+}
 
-    import BigNumber from "bignumber.js";
-    import { TxData as Tx } from "web3";
-    import { DeployedContract, TransactionResult, Request } from 'truffle-contract';
-
-    namespace {{contractName}}InstanceInternal {
-
-        {{#each methods}}
-        {{> tx_definition contractName=../contractName }}
-        {{/each}}
-    }
-
-    namespace {{contractName}}Instance {
-    }
-
-    interface {{contractName}}Instance extends DeployedContract { 
-        {{#each methods}}
-        {{this.name}}: {{@root.contractName}}InstanceInternal.{{this.tsName}}.TransactionCallable<{{> return_type }}>;
-        {{/each}}
-    }
-
-    export = {{contractName}}Instance;
-} // tslint:disable:max-file-line-count
+// tslint:disable:max-file-line-count

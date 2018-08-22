@@ -1,10 +1,7 @@
 import Web3, { DecodedLogEntryEvent } from 'web3';
-import { TruffleArtifacts } from '../src/generated/contracts/artifacts'
+import { TruffleArtifacts } from '../src/artifacts'
 import { ContractContextDefinition } from 'truffle';
-
-import FakeCoinInstance from "FakeCoinInstance"
-/// <reference path="../src/generated/contracts/fake_coin.d.ts"/>
-import { FakeCoinTransferEventArgs, FakeCoinEvents } from "FakeCoinInstanceEvents"
+import { FakeCoinInstance, FakeCoinEvents, FakeCoinTransferEventArgs } from "../src/generated"
 
 declare const web3: Web3;
 declare const artifacts: TruffleArtifacts;

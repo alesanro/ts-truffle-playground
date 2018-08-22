@@ -1,0 +1,1 @@
+export * from './contracts/fake_coin'

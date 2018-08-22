@@ -38,6 +38,10 @@ contract FakeCoin {
         return true;
     }
 
+    function getAccount(address account) public view returns (address _addr, uint _balance) {
+        return (account, balanceOf[account]);
+    }
+
     function balanceEth(address _address) public view returns (uint) {
         return _address.balance;
     }
