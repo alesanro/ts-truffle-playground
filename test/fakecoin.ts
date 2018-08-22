@@ -1,8 +1,10 @@
-import Web3 from 'web3';
+import Web3, { DecodedLogEntryEvent } from 'web3';
 import { TruffleArtifacts } from '../src/generated/contracts/artifacts'
 import { ContractContextDefinition } from 'truffle';
 
 import FakeCoinInstance from "FakeCoinInstance"
+/// <reference path="../src/generated/contracts/fake_coin.d.ts"/>
+import { FakeCoinTransferEventArgs, FakeCoinEvents } from "FakeCoinInstanceEvents"
 
 declare const web3: Web3;
 declare const artifacts: TruffleArtifacts;
@@ -30,6 +32,8 @@ contract("FakeCoin", ([ owner, ...others ]) => {
 
 		it("should mint tokens", async () => {
 			const tx = await coin.mint(owner, web3.toBigNumber("10000"))
+			const event = tx.logs[0] as DecodedLogEntryEvent<FakeCoinTransferEventArgs>
+			console.log(`### ${FakeCoinEvents.Transfer} - from: ${event.args.from}, to: ${event.args.to}, value: ${event.args.value}`)
 			console.log(`### ${JSON.stringify(tx, null, 4)}`);
 		})
 

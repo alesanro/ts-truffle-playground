@@ -3,137 +3,143 @@
 
 // tslint:enable:no-unused-variable
 
+declare module 'FakeCoinInstanceEvents' {
+
+	import BigNumber from "bignumber.js";
+	import { TxData as Tx, DecodedLogArgs } from "web3";
+
+	// namespace FakeCoinInstanceEvents {
+		export type FakeCoinEventArgs =
+			| FakeCoinTransferEventArgs;
+		
+		export enum FakeCoinEvents {
+			Transfer = 'Transfer',
+		}
+		
+		export interface FakeCoinTransferEventArgs extends DecodedLogArgs {
+			from: string;
+			to: string;
+			value: BigNumber;
+		}
+	// }
+}
 
 
-declare module "FakeCoinInstance" {
-	
-	import BigNumber from "bignumber.js"
-    import { TxData as Tx } from 'web3'
+declare module 'FakeCoinInstance' {
+
+	import BigNumber from "bignumber.js";
+	import { TxData as Tx } from "web3";
     import { DeployedContract, TransactionResult, Request } from 'truffle-contract';
 
     namespace FakeCoinInstanceInternal {
 
-          
+        
         namespace balanceOf {
         
-        	type balanceOfArgsFunction<T> = (tx?: Tx) => Promise<T>
-        
         	interface TransactionCallable<T> {
-        		request(tx?: Tx): Promise<Request>;
-        		call(tx?: Tx): Promise<T>;
-        		sendTransaction(tx?: Tx): Promise<TransactionResult>;
-        		estimateGas(tx?: Tx): Promise<number>;
+        		(index_0: string,  tx?: Tx): Promise<T>;
+        		call(index_0: string,  tx?: Tx): Promise<T>;
+        		sendTransaction(index_0: string,  tx?: Tx): Promise<TransactionResult>;
+        		estimateGas(index_0: string,  tx?: Tx): Promise<number>;
+        		request(index_0: string,  tx?: Tx): Promise<Request>;
         	}
-        
-        	interface FunctionResult<T> extends balanceOfArgsFunction<T>, TransactionCallable<T> {}
-        }                          
+        }        
         namespace mint {
-        	type mintArgsFunction<T> = (_to: string, _value: BigNumber,  tx?: Tx) => Promise<TransactionResult>
         
         	interface TransactionCallable<T> {
-        		request(_to: string, _value: BigNumber,  tx?: Tx): Promise<Request>;
+        		(_to: string, _value: BigNumber,  tx?: Tx): Promise<TransactionResult>;
         		call(_to: string, _value: BigNumber,  tx?: Tx): Promise<T>;
         		sendTransaction(_to: string, _value: BigNumber,  tx?: Tx): Promise<TransactionResult>;
         		estimateGas(_to: string, _value: BigNumber,  tx?: Tx): Promise<number>;
+        		request(_to: string, _value: BigNumber,  tx?: Tx): Promise<Request>;
         	}
-        
-        	interface FunctionResult<M> extends mintArgsFunction<M>, TransactionCallable<M> {}
-        }          
+        }        
         namespace totalSupply {
         
-        	type totalSupplyArgsFunction<T> = (tx?: Tx) => Promise<T>
-        
         	interface TransactionCallable<T> {
-        		request(tx?: Tx): Promise<Request>;
-        		call(tx?: Tx): Promise<T>;
-        		sendTransaction(tx?: Tx): Promise<TransactionResult>;
-        		estimateGas(tx?: Tx): Promise<number>;
+        		( tx?: Tx): Promise<T>;
+        		call( tx?: Tx): Promise<T>;
+        		sendTransaction( tx?: Tx): Promise<TransactionResult>;
+        		estimateGas( tx?: Tx): Promise<number>;
+        		request( tx?: Tx): Promise<Request>;
         	}
-        
-        	interface FunctionResult<T> extends totalSupplyArgsFunction<T>, TransactionCallable<T> {}
-        }                  
+        }        
         namespace symbol {
         
-        	type symbolArgsFunction<T> = (tx?: Tx) => Promise<T>
-        
         	interface TransactionCallable<T> {
-        		request(tx?: Tx): Promise<Request>;
-        		call(tx?: Tx): Promise<T>;
-        		sendTransaction(tx?: Tx): Promise<TransactionResult>;
-        		estimateGas(tx?: Tx): Promise<number>;
+        		( tx?: Tx): Promise<T>;
+        		call( tx?: Tx): Promise<T>;
+        		sendTransaction( tx?: Tx): Promise<TransactionResult>;
+        		estimateGas( tx?: Tx): Promise<number>;
+        		request( tx?: Tx): Promise<Request>;
         	}
-        
-        	interface FunctionResult<T> extends symbolArgsFunction<T>, TransactionCallable<T> {}
-        }                  
+        }        
         namespace decimals {
         
-        	type decimalsArgsFunction<T> = (tx?: Tx) => Promise<T>
-        
         	interface TransactionCallable<T> {
-        		request(tx?: Tx): Promise<Request>;
-        		call(tx?: Tx): Promise<T>;
-        		sendTransaction(tx?: Tx): Promise<TransactionResult>;
-        		estimateGas(tx?: Tx): Promise<number>;
+        		( tx?: Tx): Promise<T>;
+        		call( tx?: Tx): Promise<T>;
+        		sendTransaction( tx?: Tx): Promise<TransactionResult>;
+        		estimateGas( tx?: Tx): Promise<number>;
+        		request( tx?: Tx): Promise<Request>;
         	}
-        
-        	interface FunctionResult<T> extends decimalsArgsFunction<T>, TransactionCallable<T> {}
-        }                          
+        }        
         namespace transfer {
-        	type transferArgsFunction<T> = (_to: string, _value: BigNumber,  tx?: Tx) => Promise<TransactionResult>
         
         	interface TransactionCallable<T> {
-        		request(_to: string, _value: BigNumber,  tx?: Tx): Promise<Request>;
+        		(_to: string, _value: BigNumber,  tx?: Tx): Promise<TransactionResult>;
         		call(_to: string, _value: BigNumber,  tx?: Tx): Promise<T>;
         		sendTransaction(_to: string, _value: BigNumber,  tx?: Tx): Promise<TransactionResult>;
         		estimateGas(_to: string, _value: BigNumber,  tx?: Tx): Promise<number>;
+        		request(_to: string, _value: BigNumber,  tx?: Tx): Promise<Request>;
         	}
-        
-        	interface FunctionResult<M> extends transferArgsFunction<M>, TransactionCallable<M> {}
-        }                  
+        }        
         namespace transferFrom {
-        	type transferFromArgsFunction<T> = (_from: string, _to: string, _value: BigNumber,  tx?: Tx) => Promise<TransactionResult>
         
         	interface TransactionCallable<T> {
-        		request(_from: string, _to: string, _value: BigNumber,  tx?: Tx): Promise<Request>;
+        		(_from: string, _to: string, _value: BigNumber,  tx?: Tx): Promise<TransactionResult>;
         		call(_from: string, _to: string, _value: BigNumber,  tx?: Tx): Promise<T>;
         		sendTransaction(_from: string, _to: string, _value: BigNumber,  tx?: Tx): Promise<TransactionResult>;
         		estimateGas(_from: string, _to: string, _value: BigNumber,  tx?: Tx): Promise<number>;
+        		request(_from: string, _to: string, _value: BigNumber,  tx?: Tx): Promise<Request>;
         	}
-        
-        	interface FunctionResult<M> extends transferFromArgsFunction<M>, TransactionCallable<M> {}
-        }          
-        namespace balanceEth {
-        
-        	type balanceEthArgsFunction<T> = (tx?: Tx) => Promise<T>
+        }        
+        namespace getAccount {
         
         	interface TransactionCallable<T> {
-        		request(tx?: Tx): Promise<Request>;
-        		call(tx?: Tx): Promise<T>;
-        		sendTransaction(tx?: Tx): Promise<TransactionResult>;
-        		estimateGas(tx?: Tx): Promise<number>;
+        		(account: string,  tx?: Tx): Promise<T>;
+        		call(account: string,  tx?: Tx): Promise<T>;
+        		sendTransaction(account: string,  tx?: Tx): Promise<TransactionResult>;
+        		estimateGas(account: string,  tx?: Tx): Promise<number>;
+        		request(account: string,  tx?: Tx): Promise<Request>;
         	}
+        }        
+        namespace balanceEth {
         
-        	interface FunctionResult<T> extends balanceEthArgsFunction<T>, TransactionCallable<T> {}
-        }            }
+        	interface TransactionCallable<T> {
+        		(_address: string,  tx?: Tx): Promise<T>;
+        		call(_address: string,  tx?: Tx): Promise<T>;
+        		sendTransaction(_address: string,  tx?: Tx): Promise<TransactionResult>;
+        		estimateGas(_address: string,  tx?: Tx): Promise<number>;
+        		request(_address: string,  tx?: Tx): Promise<Request>;
+        	}
+        }    }
 
+    namespace FakeCoinInstance {
+    }
 
     interface FakeCoinInstance extends DeployedContract { 
-        balanceOf: FakeCoinInstanceInternal.balanceOf.FunctionResult<BigNumber
+        balanceOf: FakeCoinInstanceInternal.balanceOf.TransactionCallable<BigNumber>;
+        mint: FakeCoinInstanceInternal.mint.TransactionCallable<void>;
+        totalSupply: FakeCoinInstanceInternal.totalSupply.TransactionCallable<BigNumber>;
+        symbol: FakeCoinInstanceInternal.symbol.TransactionCallable<string>;
+        decimals: FakeCoinInstanceInternal.decimals.TransactionCallable<BigNumber>;
+        transfer: FakeCoinInstanceInternal.transfer.TransactionCallable<boolean>;
+        transferFrom: FakeCoinInstanceInternal.transferFrom.TransactionCallable<boolean>;
+        getAccount: FakeCoinInstanceInternal.getAccount.TransactionCallable<[string, BigNumber]
 >;
-        mint: FakeCoinInstanceInternal.mint.FunctionResult<void>;
-        totalSupply: FakeCoinInstanceInternal.totalSupply.FunctionResult<BigNumber
->;
-        symbol: FakeCoinInstanceInternal.symbol.FunctionResult<string
->;
-        decimals: FakeCoinInstanceInternal.decimals.FunctionResult<BigNumber
->;
-        transfer: FakeCoinInstanceInternal.transfer.FunctionResult<boolean
->;
-        transferFrom: FakeCoinInstanceInternal.transferFrom.FunctionResult<boolean
->;
-        balanceEth: FakeCoinInstanceInternal.balanceEth.FunctionResult<BigNumber
->;
-	}
-	
-	export = FakeCoinInstance;
+        balanceEth: FakeCoinInstanceInternal.balanceEth.TransactionCallable<BigNumber>;
+    }
+
+    export = FakeCoinInstance;
 } // tslint:disable:max-file-line-count
