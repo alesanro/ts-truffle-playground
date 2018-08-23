@@ -14,9 +14,18 @@ import { assert } from "chai";
 contract("FakeCoin", ([ owner, ...others ]) => {
 
 	let coin: FakeCoinInstance
+	let transferEvent
 
 	before(async () => {
 		coin = await FakeCoin.deployed()
+
+		transferEvent = coin.allEvents({ fromBlock: 9, toBlock: 'latest'})
+		transferEvent.watch((e, result) => {
+			console.log(`### [coin] Found event ${result.event}:`);
+			console.log(`- data: ${result.data}`)
+			// console.log(`- to: ${result.args.to}`)
+			// console.log(`- value: ${result.args.value}`)
+		})
 
 		// console.log(`### coin ${JSON.stringify(coin)}`)
 	})
@@ -31,7 +40,6 @@ contract("FakeCoin", ([ owner, ...others ]) => {
 			const tx = await coin.mint(owner, web3.toBigNumber("10000"))
 			const event = tx.logs[0] as DecodedLogEntryEvent<FakeCoinTransferEventArgs>
 			console.log(`### ${FakeCoinEvents.Transfer} - from: ${event.args.from}, to: ${event.args.to}, value: ${event.args.value}`)
-			console.log(`### ${JSON.stringify(tx, null, 4)}`);
 		})
 
 		it("should get estimated gas (mint)", async () => {
@@ -60,12 +68,10 @@ contract("FakeCoin", ([ owner, ...others ]) => {
 
 		it("should mint tokens for other account", async () => {
 			const tx = await coin.mint(others[0], web3.toBigNumber("10000"), { from: others[0] })
-			console.log(`### ${JSON.stringify(tx, null, 4)}`);
 		})
 
 		it("should mint with sendTransaction tokens for other account", async () => {
-			const tx = await coin.mint.sendTransaction(others[0], web3.toBigNumber("10000"), { from: others[0] })
-			console.log(`### ${JSON.stringify(tx, null, 4)}`);
+			await coin.mint.sendTransaction(others[0], web3.toBigNumber("10000"), { from: others[0] })
 		})
 
 		it("should get sendTransaction (totalSupply)", async () => {

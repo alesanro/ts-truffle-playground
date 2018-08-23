@@ -16,12 +16,21 @@ declare module 'web3' {
     export interface LogWithDecodedArgs<ArgsType extends DecodedLogArgs> extends DecodedLogEntry<ArgsType> {}
     export type RawLog = LogEntry;
 
-    export enum BlockParamLiteral {
-        Earliest = 'earliest',
-        Latest = 'latest',
-        Pending = 'pending',
+    export type BlockParamLiteral = 'earliest' | 'latest' | 'pending'
+
+    export interface EventFilterResult<A> {
+        get(callback: (err: Error, logs: Array<FilterEvent<A>>) => void): void;
+        watch(callback: (err: Error, result: FilterEvent<A>) => void): void;
+        stopWatching(callback: () => void): void;
     }
 
+    export interface EventFilterObject {
+        fromBlock?: number|BlockParamLiteral;
+        toBlock?: number|BlockParamLiteral;
+        address?: string;
+        topics?: LogTopic[];
+      }
+  
     export interface DecodedLogEntry<A> extends LogEntry {
         event: string;
         args: A;

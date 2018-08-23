@@ -11,7 +11,7 @@ declare module 'truffle-contract' {
 	  interface DeployedContract {
 			address: Address,
 			transactionHash: string,
-			allEvents: any
+			allEvents(value: Web3.BlockParamLiteral | Web3.EventFilterObject): Web3.FilterResult
 		}
 
 	  interface TruffleContract<A> {
