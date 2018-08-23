@@ -8,12 +8,13 @@
   "private": false,
   "scripts": {
     "test": "npx tsc && npx truffle test",
-    "clean:contracts": "rm -rf ./src/generated/contracts && rm ./src/generated/artifacts*",
-    "compile:abi": "npx abi-gen --abis ./build/contracts/**/*.json --out ./src/generated/contracts --template ./src/generated/contract_templates/contract.handlebars --partials ./src/generated/contract_templates/partials/**/*.handlebars --backend web3 --network-id 123456789",
+    "clean:contracts": "rm -rf ./src/generated/contracts && rm -f ./src/generated/artifacts*",
+    "compile:abi": "npx abi-gen --abis ./build/contracts/**/*.json --out ./src/generated/contracts --template ./src/generated/contract_templates/contract.handlebars --partials ./src/generated/contract_templates/partials/**/*.handlebars --backend web3",
     "scripts:compile": "npx tsc ./scripts/**/*.ts",
     "compile:artifacts": "npm run scripts:compile && node ./scripts/artifacts-export/cli.js -i ./src/generated/contracts -o ./src/generated -a=./build/contracts -t=./scripts/artifacts-export/templates",
     "compile:contracts": "npm run compile:abi && npm run compile:artifacts",
     "compile:force": "npm run clean:contracts && npm run compile:contracts",
+    "truffle:compile": "npx truffle compile",
     "truffle:test": "npm run compile:force && npm test"
   },
   "dependencies": {
