@@ -38,6 +38,10 @@ contract FakeCoin {
         return true;
     }
 
+    function sendEth() public payable {
+        
+    }
+
     function getAccount(address account) public view returns (address _addr, uint _balance) {
         return (account, balanceOf[account]);
     }
