@@ -67,3 +67,7 @@ typings/
 # transpiled js-files
 
 scripts/**/*.js
+
+# artifacts
+
+build/
