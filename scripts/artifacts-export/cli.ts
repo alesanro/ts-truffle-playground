@@ -64,7 +64,6 @@ const args = yargs
         describe: 'Folder with artifacts to check correctness of contracts\' names',
         type: 'string',
         normalize: true,
-        demandOption: true,
     })
     .options('contractNames', {
         alias: ['cn'],
@@ -133,7 +132,7 @@ if (_.isEmpty(contracts)) {
 
 console.log(`${chalk.underline(`Got contracts:`)}`)
 _.forEach(contracts, (contract) => {
-    console.log(`- ${chalk.gray(contract.filename)} => ${chalk.greenBright(`${contract.contractArtifactName}(${contract.contractInstanceName})`)}`)
+    console.log(`- ${chalk.gray(contract.filename)} => ${chalk.green(`${contract.contractArtifactName}`)} (${chalk.bgGreen(`${contract.contractInstanceName}`)})`)
 })
 
 /// ----------- initialize template context ----------
