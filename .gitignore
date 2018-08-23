@@ -62,6 +62,8 @@ typings/
 
 # generated content
 
+src/generated/
+
 !src/generated/contract_templates
 
 # transpiled js-files
