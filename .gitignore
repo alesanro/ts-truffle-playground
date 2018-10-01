@@ -66,10 +66,12 @@ src/generated/
 
 !src/generated/contract_templates
 
-# transpiled js-files
-
-scripts/**/*.js
-
 # artifacts
 
 build/
+
+# dist
+
+dist/
+test/**/*.js
+
