@@ -7,14 +7,13 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "test": "npx tsc && npx truffle test",
+    "test": "npx tsc --project test_tsc && npx truffle test",
+    "dist": "npx tsc --project src",
     "clean:contracts": "rm -rf ./src/generated/contracts && rm -f ./src/generated/artifacts*",
-    "compile:abi": "npx abi-gen --abis ./build/contracts/**/*.json --out ./src/generated/contracts --template ./src/generated/contract_templates/contract.handlebars --partials ./src/generated/contract_templates/partials/**/*.handlebars --backend web3",
-    "scripts:compile": "npx tsc ./scripts/**/*.ts",
-    "compile:artifacts": "npm run scripts:compile && node ./scripts/artifacts-export/cli.js -i ./src/generated/contracts -o ./src/generated -a=./build/contracts -t=./scripts/artifacts-export/templates",
+    "compile:abi": "npx abi-gen --abis ./build/contracts/**/*.json --out ./src/generated/contracts --template ./src/generated/contract_templates/contract.handlebars --partials ./src/generated/contract_templates/partials/**/*.handlebars --backend web3 --network-id 123456789",
+    "compile:artifacts": "npx artifacts-gen -i ./src/generated/contracts -o ./src/generated -a=./build/contracts -t=./node_modules/@truffle-types/artifacts-generator/templates",
     "compile:contracts": "npm run compile:abi && npm run compile:artifacts",
     "compile:force": "npm run clean:contracts && npm run compile:contracts",
-    "truffle:compile": "npx truffle compile",
     "truffle:test": "npm run compile:force && npm test"
   },
   "dependencies": {
@@ -22,7 +21,11 @@
     "@types/glob": "^5.0.35",
     "@types/handlebars": "^4.0.39",
     "glob": "^7.1.2",
-    "handlebars": "^4.0.11"
+    "handlebars": "^4.0.11",
+    "@truffle-types/web3": "^0.1.0",
+    "@truffle-types/truffle": "^0.1.0",
+    "@truffle-types/truffle-contract": "^0.1.0",
+    "@truffle-types/artifacts-generator": "^0.1.0"
   },
   "devDependencies": {
     "@0xproject/abi-gen": "^1.0.5",
